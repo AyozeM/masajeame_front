@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="hoverable">
     <ImgSlider :images="service.img" class="slider"></ImgSlider>
     <div class="data">
       <p class="title">{{service.name}}</p>
@@ -28,9 +28,10 @@ export default class Card extends Vue {
 section {
   border: 1px solid;
   display: flex;
+  cursor: pointer;
 }
 .slider {
-  --width: 25%;
+  --width: 50%;
   width: var(--width);
   height: 100%;
 }
@@ -41,7 +42,7 @@ section {
   flex-direction: column;
   max-height: 100%;
 }
-.data > *{
+.data > * {
   flex-shrink: 2;
   margin: 0;
 }
@@ -54,7 +55,7 @@ section {
 }
 .price {
   text-align: end;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 @media screen and (max-width: 576px) {
   .slider {

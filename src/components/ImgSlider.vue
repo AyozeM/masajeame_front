@@ -1,8 +1,12 @@
 <template>
   <div class="canvas">
     <div class="controls paginator">{{this.paginator}}</div>
-    <span class="controls left button" @click="changeImg(-1)">&lt;</span>
-    <span class="controls right button" @click="changeImg(1)">&gt;</span>
+    <span class="controls left button" @click="changeImg(-1)">
+      <i class="material-icons">keyboard_arrow_left</i>
+      </span>
+    <span class="controls right button" @click="changeImg(1)">
+      <i class="material-icons">keyboard_arrow_right</i>
+      </span>
     <img :src="actualImage" />
   </div>
 </template>
@@ -61,6 +65,7 @@ img {
 .controls{
   opacity: 0;
   transition: .25s;
+  user-select: none;
 }
 .button:hover {
   background: rgba(0, 0, 0, 0.5);
