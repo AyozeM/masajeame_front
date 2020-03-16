@@ -7,6 +7,7 @@
         :key="index"
         :service="service"
         class="card"
+        @click.native="openDetails(service.id)"
       ></Card>
     </div>
   </section>
@@ -19,7 +20,7 @@ import { SpaService } from "../models/SpaService";
 import Card from "@/components/Card.vue";
 import ListControls, { SortEnum } from "@/components/ListControls.vue";
 import { removeAccentMarks } from "@/utils/String.utils";
-
+const bookingService = new BookingService();
 @Component({
   components: {
     Card,
@@ -35,15 +36,17 @@ export default class Home extends Vue {
   // lifehooks events
   async mounted() {
     try {
-      this.services = (await BookingService.getServices()).data.map(
-        (e: any) => new SpaService(e)
-      );
+      this.services = await bookingService.getServices();
     } catch (error) {
       console.error(error);
     }
   }
 
   //methods
+  openDetails(id: number) {
+    this.$router.push({ name: "service", params: { id: id.toString() } });
+  }
+
   sortServices(sortRule: SortEnum): void {
     this.services = this.services.sort((a: SpaService, b: SpaService) =>
       sortRule === SortEnum.asc ? a.price - b.price : b.price - a.price
@@ -56,7 +59,9 @@ export default class Home extends Vue {
     let services = this.services;
     if (this.filter) {
       services = this.services.filter((e: SpaService) =>
-        removeAccentMarks(e.name.toLowerCase()).includes(removeAccentMarks(this.filter.toLowerCase()))
+        removeAccentMarks(e.name.toLowerCase()).includes(
+          removeAccentMarks(this.filter.toLowerCase())
+        )
       );
     }
     return services;

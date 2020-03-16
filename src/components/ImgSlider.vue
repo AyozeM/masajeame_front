@@ -1,10 +1,10 @@
 <template>
   <div class="canvas">
     <div class="controls paginator">{{this.paginator}}</div>
-    <span class="controls left button" @click="changeImg(-1)">
+    <span class="controls left button" @click.stop="changeImg(-1)">
       <i class="material-icons">keyboard_arrow_left</i>
       </span>
-    <span class="controls right button" @click="changeImg(1)">
+    <span class="controls right button" @click.stop="changeImg(1)">
       <i class="material-icons">keyboard_arrow_right</i>
       </span>
     <img :src="actualImage" />

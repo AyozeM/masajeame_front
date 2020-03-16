@@ -1,15 +1,16 @@
+import { getDefaultStringDate } from '@/utils/Date.utils';
+
 export interface SpaServiceI {
   id: number;
   name: string;
   description: string;
   img: string[];
   price: number;
-  availableHours: TimetableI[];
 }
 
 export interface TimetableI {
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
 }
 
 export class SpaService implements SpaServiceI {
@@ -19,7 +20,7 @@ export class SpaService implements SpaServiceI {
   description: string;
   img: string[];
   private _price!: number;
-  private _availableHours: TimetableI[];
+  private _availableHours: Map<string, TimetableI[]> = new Map<string, TimetableI[]>();
 
   constructor(data: any) {
     this._id = data.id;
@@ -27,9 +28,19 @@ export class SpaService implements SpaServiceI {
     this.description = data?.description;
     this.price = data?.price;
     this.img = [...data?.img];
-    this._availableHours = [...data.availableHours].map(e => ({ start: new Date(e.start), end: new Date(e.end) }));
+    console.log(data.availableHours);
 
+    data.availableHours.forEach((e: any) => {
+      this._availableHours.set(e.date, e.ranges as TimetableI[]);
+    })
+
+    console.log(this);
   }
+
+  getavailableHours(date: Date): TimetableI[] {
+    return this._availableHours.get(getDefaultStringDate(date)) || [];
+  }
+
 
   get id(): number {
     return this._id;
@@ -46,7 +57,4 @@ export class SpaService implements SpaServiceI {
     this._price = amount;
   }
 
-  get availableHours(): TimetableI[] {
-    return this._availableHours;
-  }
 }
