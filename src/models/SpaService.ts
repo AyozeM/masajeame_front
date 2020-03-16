@@ -28,13 +28,9 @@ export class SpaService implements SpaServiceI {
     this.description = data?.description;
     this.price = data?.price;
     this.img = [...data?.img];
-    console.log(data.availableHours);
-
     data.availableHours.forEach((e: any) => {
       this._availableHours.set(e.date, e.ranges as TimetableI[]);
     })
-
-    console.log(this);
   }
 
   getavailableHours(date: Date): TimetableI[] {

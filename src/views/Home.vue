@@ -1,5 +1,5 @@
 <template>
-  <section class="home">
+  <section class="home" ref="spinner">
     <list-controls class="controls" @search="filter = $event" @sort="sortServices($event)"></list-controls>
     <div class="grid">
       <Card
@@ -20,6 +20,7 @@ import { SpaService } from "../models/SpaService";
 import Card from "@/components/Card.vue";
 import ListControls, { SortEnum } from "@/components/ListControls.vue";
 import { removeAccentMarks } from "@/utils/String.utils";
+import { AsyncPage } from "./GenericPage";
 const bookingService = new BookingService();
 @Component({
   components: {
@@ -27,7 +28,7 @@ const bookingService = new BookingService();
     ListControls
   }
 })
-export default class Home extends Vue {
+export default class Home extends AsyncPage {
   //data
   services: SpaService[] = [];
   filter = "";
@@ -36,9 +37,12 @@ export default class Home extends Vue {
   // lifehooks events
   async mounted() {
     try {
+      this.showSpinner();
       this.services = await bookingService.getServices();
     } catch (error) {
       console.error(error);
+    } finally {
+      this.hideSpinner();
     }
   }
 

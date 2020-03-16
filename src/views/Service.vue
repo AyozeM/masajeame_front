@@ -64,9 +64,6 @@ export default class Service extends AsyncPage {
     const { id } = this.$route.params;
     try {
       this.showSpinner();
-      await new Promise(resolve => {
-        setTimeout(() => resolve(), 3000);
-      });
       this.service = await this.bookingService.getServiceById(+id);
     } catch (error) {
       console.error(error);
