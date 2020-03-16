@@ -1,29 +1,26 @@
-# masajeame
+# Masajeame
+Este proyecto es un prototipo para un gestor de servicios, en este caso orientado al mundo del bienestar (masajes, spa, estética,...)
 
-## Project setup
-```
-npm install
-```
+El proyecto consta de un backend y un frontend (este repo).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Backend setup
+Deberemos descargar el código desde : https://github.com/AyozeM/masajeame_back.git.
 
-### Run your unit tests
+**Advertecia**, asegurate de que tienes disponible el puerto **3000**
+
 ```
-npm run test:unit
+npm i
+```
+```
+npm run start
 ```
 
-### Lints and fixes files
+## frontend setup
+Se servirá automáticamente en http://localhost:8080
 ```
-npm run lint
+npm i
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm run dev
+```
