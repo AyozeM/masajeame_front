@@ -25,11 +25,8 @@
 
 <script lang="ts">
 import { Vue, Component, Emit, Prop } from "vue-property-decorator";
+import { SortEnum } from "@/typings/Sort.enum";
 
-export enum SortEnum {
-  asc,
-  desc
-}
 @Component
 export default class ListControls extends Vue {
   private text = "";

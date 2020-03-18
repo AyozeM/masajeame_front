@@ -18,10 +18,11 @@ import { BookingService } from "../services/Booking.service";
 import { Vue, Component } from "vue-property-decorator";
 import { SpaService } from "../models/SpaService";
 import Card from "@/components/Card.vue";
-import ListControls, { SortEnum } from "@/components/ListControls.vue";
+import ListControls from "@/components/ListControls.vue";
+import { SortEnum } from "@/typings/Sort.enum";
 import { removeAccentMarks } from "@/utils/String.utils";
 import { AsyncPage } from "./GenericPage";
-const bookingService = new BookingService();
+
 @Component({
   components: {
     Card,
@@ -29,23 +30,29 @@ const bookingService = new BookingService();
   }
 })
 export default class Home extends AsyncPage {
+  // service
+  private readonly bookingService = new BookingService();
+
   //data
   services: SpaService[] = [];
   filter = "";
   sortRule!: SortEnum;
 
   // lifehooks events
-  async mounted() {
+  mounted() {
+    this.getServices();
+  }
+
+  async getServices() {
     try {
       this.showSpinner();
-      this.services = await bookingService.getServices();
+      this.services = await this.bookingService.getServices();
     } catch (error) {
       console.error(error);
     } finally {
       this.hideSpinner();
     }
   }
-
   //methods
   openDetails(id: number) {
     this.$router.push({ name: "service", params: { id: id.toString() } });

@@ -51,6 +51,7 @@ import {
 export default class Service extends AsyncPage {
   // servicio
   private readonly bookingService: BookingService = new BookingService();
+  
   private service: SpaService | undefined = undefined;
   private selectedDate = new Date();
   private datePickerOpts = {
