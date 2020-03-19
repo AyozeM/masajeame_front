@@ -47,8 +47,10 @@ export default class Home extends AsyncPage {
     try {
       this.showSpinner();
       this.services = await this.bookingService.getServices();
+      this.showToast("servicios cargados", "success");
     } catch (error) {
       console.error(error);
+      this.showToast("Fallo al obtener los datos", "danger");
     } finally {
       this.hideSpinner();
     }

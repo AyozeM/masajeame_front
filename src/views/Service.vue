@@ -67,6 +67,7 @@ export default class Service extends AsyncPage {
       this.showSpinner();
       this.service = await this.bookingService.getServiceById(+id);
     } catch (error) {
+      this.showToast('No se pudo cargar el servicio','danger');
       console.error(error);
     } finally {
       this.pageReady = true;
