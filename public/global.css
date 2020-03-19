@@ -1,0 +1,16 @@
+.toast {
+  background-color: var(--back-color) !important;
+  color           : var(--font-color, #fff) !important;
+}
+
+.danger {
+  --back-color: darkred;
+}
+
+.info {
+  --back-color: lightskyblue;
+}
+
+.success {
+  --back-color: seagreen;
+}
